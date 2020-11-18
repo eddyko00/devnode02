@@ -2,7 +2,7 @@ var assert = require('assert')
 var util = require('util')
 var nn = require('./lib/nn')
 
-describe('simple-nn', function() {
+var test = function (n) { 
 
     it('initializes weights/biases matrices properly', function (done) {
         var net = nn({
@@ -181,7 +181,7 @@ describe('simple-nn', function() {
 
         done()
     })
-})
+}
 
 function trainAndTest (net, trainingData) {
     net.train(trainingData)
