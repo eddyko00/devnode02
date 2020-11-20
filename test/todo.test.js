@@ -24,52 +24,51 @@ afterEach(async (_, { context }) => {
   await close()
 })
 
-test('empty todos', async ({same, context}) => {
-  const { host } = context
-  const res = await supertest(host).get('/todo')
-//  console.log(res)
-  same(res.body, { items: [] })
-})
-
-test('add a todo, list todos', async ({is, same, context})  => {
-  const { host } = context
-  const add = await supertest(host).post('/todo').send({
-    name: 'do a thing'
-  })
-  const { _id } = add.body
-  is(add.statusCode, 201)
-  is(add.headers.location, `/todo/${_id}`)
-  
-  const res = await supertest(host).get('/todo')
-  same(res.body, {
-    items: [{
-      name: 'do a thing',
-      _id
-    }]
-  })
-})
-
-test('add a todo, get a todo', async ({is, same, context}) => {
-  const { host } = context
-  const add = await supertest(host).post('/todo').send({
-    name: 'do a thing'
-  })
-  const { _id } = add.body
-  is(add.statusCode, 201)
-  is(add.headers.location, `/todo/${_id}`)
-
-  const res =  await supertest(host).get(`/todo/${_id}`)
-
-  same(res.body, {
-    name: 'do a thing',
-    _id
-  })
- 
-})
-
-test('404 todo', async ({ is, context }) => {
-  const { host } = context
-  const notAnItem = '5d4b090cba1afa7471cebe50'
-  const res = await supertest(host).get(`/todo/${notAnItem}`)
-  is(res.statusCode, 404)
-})
+//test('empty todos', async ({same, context}) => {
+//  const { host } = context
+//  const res = await supertest(host).get('/todo')
+//  same(res.body, { items: [] })
+//})
+//
+//test('add a todo, list todos', async ({is, same, context})  => {
+//  const { host } = context
+//  const add = await supertest(host).post('/todo').send({
+//    name: 'do a thing'
+//  })
+//  const { _id } = add.body
+//  is(add.statusCode, 201)
+//  is(add.headers.location, `/todo/${_id}`)
+//  
+//  const res = await supertest(host).get('/todo')
+//  same(res.body, {
+//    items: [{
+//      name: 'do a thing',
+//      _id
+//    }]
+//  })
+//})
+//
+//test('add a todo, get a todo', async ({is, same, context}) => {
+//  const { host } = context
+//  const add = await supertest(host).post('/todo').send({
+//    name: 'do a thing'
+//  })
+//  const { _id } = add.body
+//  is(add.statusCode, 201)
+//  is(add.headers.location, `/todo/${_id}`)
+//
+//  const res =  await supertest(host).get(`/todo/${_id}`)
+//
+//  same(res.body, {
+//    name: 'do a thing',
+//    _id
+//  })
+// 
+//})
+//
+//test('404 todo', async ({ is, context }) => {
+//  const { host } = context
+//  const notAnItem = '5d4b090cba1afa7471cebe50'
+//  const res = await supertest(host).get(`/todo/${notAnItem}`)
+//  is(res.statusCode, 404)
+//})
