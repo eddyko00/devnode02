@@ -7,8 +7,7 @@
     "test": "tap -R classic",
     "start": "node ./bin/www",
     "dev": "node ./bin/www | pino-pretty",
-    "debug": "node --inspect-brk ./bin/www"    
-        
+    "debug": "node --inspect-brk ./bin/www"
   },
   "keywords": [],
   "author": "",
